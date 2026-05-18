@@ -1,0 +1,14 @@
+[models]
+chain = [
+  { provider = "openrouter", model = "gpt-4o-mini" },
+  { provider = "openrouter", model = "claude-3-haiku" },
+]
+
+[sources.github]
+limit = 25
+
+[sources.huggingface]
+models = 15
+datasets = 15
+spaces = 15
+papers = 15
