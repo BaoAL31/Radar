@@ -2,13 +2,44 @@
 chain = [
   { provider = "openrouter", model = "gpt-4o-mini" },
   { provider = "openrouter", model = "claude-3-haiku" },
+  { provider = "openrouter", model = "deepseek/deepseek-v4-flash:free" },
 ]
 
 [sources.github]
 limit = 25
 
 [sources.huggingface]
-models = 15
-datasets = 15
-spaces = 15
-papers = 15
+models = 10
+datasets = 5
+spaces = 5
+papers = 5
+
+[topics]
+blocklist = [
+  "Artificial Intelligence",
+  "Machine Learning",
+  "Deep Learning",
+  "Natural Language Processing",
+  "Computer Vision",
+  "Reinforcement Learning",
+  "Large Language Models",
+  "Large Language Model",
+  "Dataset",
+  "Benchmark",
+  "Fine-Tuning",
+  "Transformer",
+  "Transformers",
+  "Diffusion Models",
+  "Image Generation",
+  "Text-to-Speech",
+  "Text-to-Image",
+  "Multi-Agent Systems",
+  "Transfer Learning",
+  "Multimodal Learning",
+  "Conversational AI",
+  "Generative AI",
+  "Generative Adversarial Networks",
+  "Chatbot",
+  "Multimodal",
+  "Model Compression",
+]

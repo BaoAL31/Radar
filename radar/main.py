@@ -57,20 +57,20 @@ def main():
     for repo in repos:
         topics = extract_topics(repo, config)
         if topics:
-            merge_results(nodes, edges, repo.url, topics, today)
+            merge_results(nodes, edges, repo.url, topics, today, project_title=repo.project_title)
             success += 1
         else:
             fail += 1
 
-    save_graph(nodes, edges)
+    save_graph(nodes, edges, today)
 
     audit["total_repos"] = total
     audit["extraction_success"] = success
     audit["extraction_fail"] = fail
 
-    write_daily(nodes, edges, today, audit)
-    write_monthly(nodes, edges, today)
-    write_topic_pages(nodes, edges)
+    write_daily(nodes, edges, today, audit, blocklist=config.topic_blocklist)
+    write_monthly(nodes, edges, today, blocklist=config.topic_blocklist)
+    write_topic_pages(nodes, edges, today)
 
     print(f"[radar] done — {success}/{total} repos extracted, {len(nodes)} topics, {len(edges)} edges")
 

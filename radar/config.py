@@ -33,6 +33,7 @@ class Config:
     model_chain: list[ModelEntry] = field(default_factory=list)
     github_limit: int = 25
     hf_limits: HFSourceLimits = field(default_factory=HFSourceLimits)
+    topic_blocklist: list[str] = field(default_factory=list)
 
 
 def load_config() -> Config:
@@ -61,5 +62,7 @@ def load_config() -> Config:
             spaces=hf.get("spaces", 15),
             papers=hf.get("papers", 15),
         )
+
+        cfg.topic_blocklist = data.get("topics", {}).get("blocklist", [])
 
     return cfg
