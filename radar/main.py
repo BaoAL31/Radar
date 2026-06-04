@@ -5,8 +5,8 @@ import sys
 from datetime import date
 
 from .config import load_config, ROOT
-from .graph import load_graph, save_graph, merge_results
-from .extractor import extract_topics
+from .graph import load_graph, save_graph, merge_results, get_processed_repo_urls
+from .extraction_graph import invoke_extraction_graph
 from .writer import write_daily, write_monthly, write_topic_pages
 from .scrapers.github import scrape_github_trending
 from .scrapers.huggingface import (
@@ -53,9 +53,16 @@ def main():
     total = len(repos)
     success = 0
     fail = 0
+    skipped = 0
 
-    for repo in repos:
-        topics = extract_topics(repo, config)
+    processed_urls = get_processed_repo_urls(nodes)
+
+    for i, repo in enumerate(repos, 1):
+        if repo.url in processed_urls:
+            skipped += 1
+            continue
+        print(f"[radar] [{i}/{total}] extracting topics from {repo.title}")
+        topics = invoke_extraction_graph(repo, config)
         if topics:
             merge_results(nodes, edges, repo.url, topics, today, project_title=repo.project_title)
             success += 1
@@ -67,12 +74,13 @@ def main():
     audit["total_repos"] = total
     audit["extraction_success"] = success
     audit["extraction_fail"] = fail
+    audit["repos_skipped"] = skipped
 
     write_daily(nodes, edges, today, audit, blocklist=config.topic_blocklist)
     write_monthly(nodes, edges, today, blocklist=config.topic_blocklist)
     write_topic_pages(nodes, edges, today)
 
-    print(f"[radar] done — {success}/{total} repos extracted, {len(nodes)} topics, {len(edges)} edges")
+    print(f"[radar] done — {success} extracted, {fail} failed, {skipped} skipped — {total} total, {len(nodes)} topics, {len(edges)} edges")
 
 
 if __name__ == "__main__":

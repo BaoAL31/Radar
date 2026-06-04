@@ -1,15 +1,16 @@
 [models]
+# use_critic_loop = false  # set true to enable critic/refiner quality loop (extra LLM calls)
 chain = [
-  { provider = "openrouter", model = "gpt-4o-mini" },
-  { provider = "openrouter", model = "claude-3-haiku" },
-  { provider = "openrouter", model = "deepseek/deepseek-v4-flash:free" },
+  { model = "poolside/laguna-m.1:free" },
+  { model = "meta-llama/llama-3.3-70b-instruct:free" },
+  { model = "google/gemma-4-31b-it:free" },
 ]
 
 [sources.github]
-limit = 25
+limit = 20
 
 [sources.huggingface]
-models = 10
+models = 5
 datasets = 5
 spaces = 5
 papers = 5

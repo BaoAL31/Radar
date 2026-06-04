@@ -4,5 +4,4 @@ __pycache__/
 *.pyc
 *.egg-info/
 data/
-vault/
 node_modules/

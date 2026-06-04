@@ -20,8 +20,17 @@ radar/
 ├── scrapers/
 │   ├── github.py         HTML scrape of github.com/trending
 │   └── huggingface.py    HF API (huggingface_hub) models/datasets/spaces + REST for papers
-├── extractor.py          LLM topic extraction via OpenRouter (fallback model list)
-├── graph.py              node/edge store (JSON), dedup, alias resolution
+├── extraction_graph/     ← LangGraph critic loop: extract → critique → refine
+│   ├── __init__.py       exports invoke_extraction_graph()
+│   ├── state.py          ExtractionState TypedDict
+│   ├── graph.py          LangGraph nodes, routing, compile()
+│   ├── prompts.py        LLM prompt templates
+│   └── nodes/
+│       ├── extractor.py  initial topic extraction via OpenRouter
+│       ├── critic.py     quality evaluation
+│       └── refiner.py    surgical fixes from critic feedback
+├── extractor.py          ← backward-compat re-exports (call_openrouter, EXTRACTION_PROMPT)
+├── graph.py              node/edge store (JSON), dedup, alias resolution, edge creation
 ├── writer.py             generates vault/Daily/*.md, vault/Topics/*.md
 └── config.py             loads .env + config.toml
 ```
@@ -75,6 +84,7 @@ vault/
 ```powershell
 python -m radar.main                    # full daily run
 python -m radar.main --source github    # single source for testing
+python -m radar.eval.judge             # run eval against eval/dataset.json
 ```
 
 ## Monthly evolution

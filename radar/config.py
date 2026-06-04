@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import os
 from pathlib import Path
+from typing import Any
 from dataclasses import dataclass, field
 
 from dotenv import load_dotenv
@@ -13,8 +14,9 @@ ROOT = Path(__file__).resolve().parent.parent
 
 @dataclass
 class ModelEntry:
-    provider: str
     model: str
+    provider: str = ""
+    thinking: Any = None
 
 
 @dataclass
@@ -34,6 +36,7 @@ class Config:
     github_limit: int = 25
     hf_limits: HFSourceLimits = field(default_factory=HFSourceLimits)
     topic_blocklist: list[str] = field(default_factory=list)
+    use_critic_loop: bool = False
 
 
 def load_config() -> Config:
