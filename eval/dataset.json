@@ -1,0 +1,18 @@
+[
+  {
+    "repo": {
+      "title": "unslothai/unsloth",
+      "description": "2-5x faster fine-tuning of Llama 3.2, DeepSeek-R1, Gemma 3 with QLoRA, 4-bit quantization, and efficient memory usage",
+      "readme_content": "# Unsloth\n\nFine-tune Llama 3.2, DeepSeek-R1, and Gemma 3 2-5x faster with 80% less memory.\n\n## Features\n- QLoRA and LoRA support\n- 4-bit quantization using NF4\n- Flash Attention 2 integration\n- Gradient checkpointing\n- Supports multiple models\n\n## Quick Start\n```python\nfrom unsloth import FastLanguageModel\nmodel, tokenizer = FastLanguageModel.from_pretrained(\n    \"unsloth/Llama-3.2-3B\",\n    load_in_4bit=True,\n)\n```",
+      "source_type": "github",
+      "url": "https://github.com/unslothai/unsloth"
+    },
+    "expected": [
+      {"canonical": "Unsloth", "aliases": [], "category": "Fine-Tuning", "level": "high", "parents": []},
+      {"canonical": "QLoRA", "aliases": [], "category": "Fine-Tuning", "level": "low", "parents": ["Unsloth"]},
+      {"canonical": "LoRA", "aliases": ["Low-Rank Adaptation"], "category": "Fine-Tuning", "level": "low", "parents": ["Unsloth"]},
+      {"canonical": "4-bit Quantization", "aliases": ["NF4"], "category": "Quantization", "level": "low", "parents": ["Unsloth"]},
+      {"canonical": "Flash Attention 2", "aliases": [], "category": "Model Architecture", "level": "low", "parents": ["Unsloth"]}
+    ]
+  }
+]

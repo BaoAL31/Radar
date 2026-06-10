@@ -17,7 +17,7 @@ def call_openrouter(
     api_key: str,
     system_prompt: str | None = None,
     user_content: str | None = None,
-    max_tokens: int = 2048,
+    max_tokens: int = 4096,
     thinking: Any = None,
 ) -> Any:
     system = system_prompt or EXTRACTION_PROMPT
