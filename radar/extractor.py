@@ -168,7 +168,7 @@ def extract_topics(repo: Repo, config: Config) -> Optional[list[dict]]:
     chain_errors = []
 
     for model_entry in config.model_chain:
-        print(f"  [extractor] {repo.title} → trying {model_entry.model}")
+        print(f"  [extractor] {repo.title} -> trying {model_entry.model}")
         attempt = 0
         wait = 1
 
