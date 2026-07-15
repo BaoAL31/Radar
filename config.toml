@@ -2,8 +2,9 @@
 # use_critic_loop = false  # set true to enable critic/refiner quality loop (extra LLM calls)
 chain = [
   { model = "poolside/laguna-m.1:free" },
-  { model = "meta-llama/llama-3.3-70b-instruct:free" },
-  { model = "google/gemma-4-31b-it:free" },
+  { model = "nvidia/nemotron-3-super-120b-a12b:free" },
+  { model = "cohere/north-mini-code:free" },
+  { model = "poolside/laguna-xs-2.1:free" },
 ]
 
 [sources.github]
